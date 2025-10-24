@@ -26,8 +26,8 @@ bat "npm install"
 
 stage('Build') {
 steps {
-echo "Building Calculator App v${APP_VERSION} on branch
-${params.BRANCH_NAME}"
+echo "Building Calculator App v${APP_VERSION} on branch ${params.BRANCH_NAME}"
+
 }
 }
 
