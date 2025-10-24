@@ -2,64 +2,63 @@ pipeline {
 agent any
 
 tools {
-nodejs &#39;NodeJS&#39;
+nodejs 'NodeJS'
 }
 
 parameters {
-string(name: &#39;BRANCH_NAME&#39;, defaultValue: &#39;main&#39;)
-string(name: &#39;BUILD_ENV&#39;, defaultValue: &#39;dev&#39;)
-string(name: &#39;STUDENT_NAME&#39;, defaultValue: &#39;your name&#39;) //provide your name here, no
-name, no marks
+string(name: 'BRANCH_NAME', defaultValue: 'main')
+string(name: 'BUILD_ENV', defaultValue: 'dev')
+string(name: 'STUDENT_NAME', defaultValue: 'zainab tahir') 
 
 }
 
 environment {
-APP_VERSION = &quot;1.0.0&quot;
+APP_VERSION = "1.0.0"
 }
 
 stages {
-stage(&#39;Install Dependencies&#39;) {
+stage('Install Dependencies') {
 steps {
-echo &quot;Installing Node.js dependencies...&quot;
-bat &quot;npm install&quot;
+echo "Installing Node.js dependencies..."
+bat "npm install"
 }
 }
 
-stage(&#39;Build&#39;) {
+stage('Build') {
 steps {
-echo &quot;Building Calculator App v${APP_VERSION} on branch
-${params.BRANCH_NAME}&quot;
+echo "Building Calculator App v${APP_VERSION} on branch
+${params.BRANCH_NAME}"
 }
 }
 
-stage(&#39;Unit Test&#39;) {
+stage('Unit Test') {
 when {
-expression { return params.BUILD_ENV == &#39;dev&#39; }
+expression { return params.BUILD_ENV == 'dev' }
 }
 
 steps {
-echo &#39;Running unit tests with Jest...&#39;
-bat &quot;npm test&quot;
+echo 'Running unit tests with Jest...'
+bat "npm test"
 }
 }
 
-stage(&#39;Deploy&#39;) {
+stage('Deploy') {
 steps {
-echo &#39;Simulating deployment of Node.js Calculator App...&#39;
+echo 'Simulating deployment of Node.js Calculator App...'
 }
 }
 }
 
 post {
 always {
-echo &#39;Cleaning up workspace...&#39;
+echo 'Cleaning up workspace...'
 // deleteDir()
 }
 success {
-echo &#39;Pipeline executed successfully.&#39;
+echo 'Pipeline executed successfully.'
 }
 failure {
-echo &#39;Pipeline failed.&#39;
+echo 'Pipeline failed.'
 }
 }
 }
